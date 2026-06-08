@@ -14,8 +14,8 @@ public:
     virtual ~Vehicle() =  default;
     virtual double calculateBaseRepairCost() = 0;
     virtual std::string getInfo() ;
-    double getBaseRepairCost();
-    std::string getVin();
+    double getBaseRepairCost() const; //proba dodania consta zeby dzialal repair order
+    std::string getVin() const; //tutaj tak samo jak na gorze ^
 
 private:
     std::string vin;

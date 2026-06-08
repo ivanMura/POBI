@@ -6,7 +6,7 @@
 #define UNTITLED5_MOTORCYCLE_H
 #include <string>
 
-#include "../Vehicle.h"
+#include "model/Vehicle.h"
 
 
 class Motorcycle  : public Vehicle

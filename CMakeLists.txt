@@ -31,7 +31,15 @@ set(SOURCE_FILES
         library/src/repositories/VehicleRepository.cpp
         library/include/repositories/VehicleRepository.h
         library/src/managers/VehicleManager.cpp
-        library/include/managers/VehicleManager.h)
+        library/include/managers/VehicleManager.h
+        library/include/StatusType.h
+        library/include/Part.h
+        library/src/RepairOrder.cpp
+        library/include/RepairOrder.h
+        library/src/repositories/RepairOrderRepository.cpp
+        library/include/repositories/RepairOrderRepository.h
+        library/src/managers/RepairOrderManager.cpp
+        library/include/managers/RepairOrderManager.h)
 
 add_executable(untitled5 ${SOURCE_FILES}
         program/src/main.cpp
