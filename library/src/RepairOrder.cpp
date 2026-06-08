@@ -5,13 +5,13 @@
 #include "../include/RepairOrder.h"
 
 RepairOrder::RepairOrder(int id, std::string arrivalTime, std::string issueType, std::shared_ptr<Vehicle> vehicle)
-: id(id), arrivalTime(arrivalTime), issueType(issueType), vehicle(vehicle) {}
+: id(id), arrivalTime(arrivalTime), issueType(issueType), vehicle(vehicle), status(StatusType::NEW) {}
 
 void RepairOrder::addPart(std::shared_ptr<Part> part) {
     if (part != nullptr) {
         parts.push_back(part);
         if (status == StatusType::NEW) {
-            status == StatusType::PROCESSING;
+            status = StatusType::PROCESSING;
         }
     }
 }
