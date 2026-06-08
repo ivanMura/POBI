@@ -12,32 +12,32 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
 set(SOURCE_FILES
-        src/main.cpp
-        src/vehicle.cpp
-        include/vehicle.h
-        src/Car.cpp
-        include/Car.h
-        src/Motorcycle.cpp
-        include/Motorcycle.h
-        src/Client.cpp
-        include/Client.h
-        src/ClientRepository.cpp
-        include/ClientRepository.h
-        src/ClientManager.cpp
-        include/ClientManager.h
-        src/ClientManager.cpp
-        src/LogicContainer.cpp
-        include/LogicContainer.h
-        src/VehicleRepository.cpp
-        include/VehicleRepository.h
-        src/VehicleManager.cpp
-        include/VehicleManager.h)
+        program/src/main.cpp
+        library/src/model/Vehicle.cpp
+        library/include/model/Vehicle.h
+        library/src/model/Car.cpp
+        library/include/model/Car.h
+        library/src/model/Motorcycle.cpp
+        library/include/model/Motorcycle.h
+        library/src/model/Client.cpp
+        library/include/model/Client.h
+        library/src/repositories/ClientRepository.cpp
+        library/include/repositories/ClientRepository.h
+        library/src/managers/ClientManager.cpp
+        library/include/managers/ClientManager.h
+        library/src/managers/ClientManager.cpp
+        library/src/LogicContainer.cpp
+        library/include/LogicContainer.h
+        library/src/repositories/VehicleRepository.cpp
+        library/include/repositories/VehicleRepository.h
+        library/src/managers/VehicleManager.cpp
+        library/include/managers/VehicleManager.h)
 
 add_executable(untitled5 ${SOURCE_FILES}
-            src/main.cpp
-        src/ClientManager.cpp)
+        program/src/main.cpp
+        library/src/managers/ClientManager.cpp)
 
-target_include_directories(untitled5 PUBLIC include)
+target_include_directories(untitled5 PUBLIC library/include)
 
 
 #TESTs
