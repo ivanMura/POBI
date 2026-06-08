@@ -1,0 +1,135 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class LogicContainer {
+  + getClientManager(): ClientManager&
+  + getVehicleManager(): VehicleManager&
+  + getRepairOrderManager(): RepairOrderManager&
+}
+
+class ClientManager {
+  - clientRepository: ClientRepository*
+  + registerClient(firstName: String, lastName: String): Client*
+  + findClientById(id: int): Client*
+}
+
+class VehicleManager {
+  - vehicleRepository: VehicleRepository*
+  + addVehicleToClient(clientId: int, vehicle: Vehicle*): void
+}
+
+class RepairOrderManager {
+  - orderRepository: RepairOrderRepository*
+  + createOrder(vehicleVin: String, issueType: String): RepairOrder*
+  + addPartToOrder(orderId: int, part: Part*): void
+  + closeOrder(orderId: int): void
+}
+
+note left of RepairOrderManager::createOrder
+  **Warunek (Scenariusz):**
+  Zlecenie nie zostanie utworzone,
+  jeśli pojazd (o podanym vehicleVin)
+  ma już przypisane aktywne zlecenie
+  (status NEW lub PROCESSING).
+end note
+
+class ClientRepository {
+  - clients: std::vector<Client*>
+  + add(client: Client*): void
+  + remove(id: int): void
+  + getAll(): std::vector<Client*>
+}
+
+class VehicleRepository {
+  - vehicles: std::vector<Vehicle*>
+  + add(vehicle: Vehicle*): void
+  + getByVin(vin: String): Vehicle*
+}
+
+class RepairOrderRepository {
+  - orders: std::vector<RepairOrder*>
+  + add(order: RepairOrder*): void
+  + getById(id: int): RepairOrder*
+}
+
+abstract class Vehicle {
+  - vin: String
+  - brand: String
+  - model: String
+  + {abstract} calculateBaseRepairCost(): double
+  + {abstract} getInfo(): String
+}
+
+note top of Vehicle
+  **Zmienne zachowanie (Polimorfizm):**
+  - calculateBaseRepairCost(): różne typy pojazdów
+    mają inny koszt początkowy naprawy.
+  - getInfo(): polimorficznie zwraca dane ze
+    specyficznymi polami (np. liczba drzwi dla Car).
+end note
+
+class Car extends Vehicle {
+  - doorCount: int
+  + calculateBaseRepairCost(): double
+  + getInfo(): String
+}
+
+class Motorcycle extends Vehicle {
+  - typeOfWheels: String
+  + calculateBaseRepairCost(): double
+  + getInfo(): String
+}
+
+class Client {
+  - id: int
+  - firstName: String
+  - lastName: String
+  + getFullName(): String
+}
+
+class RepairOrder {
+  - id: int
+  - arrivalTime: Date
+  - issueType: String
+  - status: StatusType
+  + addPart(part: Part*): void
+  + calculateTotalCost(): double
+  + closeOrder(): void
+}
+
+enum StatusType {
+  NEW
+  PROCESSING
+  COMPLETED
+}
+
+class Part {
+  - name: String
+  - cost: double
+}
+
+
+
+LogicContainer "1" *--> "1" ClientManager : zawiera >
+LogicContainer "1" *--> "1" VehicleManager : zawiera >
+LogicContainer "1" *--> "1" RepairOrderManager : zawiera >
+
+ClientManager "1" *--> "1" ClientRepository : zarządza >
+VehicleManager "1" *--> "1" VehicleRepository : zarządza >
+RepairOrderManager "1" *--> "1" RepairOrderRepository : zarządza >
+
+ClientRepository "1" o--> "*" Client : agreguje >
+VehicleRepository "1" o--> "*" Vehicle : agreguje >
+RepairOrderRepository "1" o--> "*" RepairOrder : agreguje >
+
+Client "1" --> "*" Vehicle : posiada >
+RepairOrder "*" --> "1" Vehicle : dotyczy >
+RepairOrder "1" *--> "*" Part : zawiera części (kompozycja) >
+
+note top of LogicContainer
+  Klasa grupująca wszystkie menedżery,
+  zapewniająca jeden punkt wejścia
+  oraz separację logiki od interfejsu.
+end note
+
+@enduml
