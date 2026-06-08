@@ -11,42 +11,37 @@ enable_language(CXX)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
-set(SOURCE_FILES
-        program/src/main.cpp
+set(LIBRARY_SOURCES
         library/src/model/Vehicle.cpp
-        library/include/model/Vehicle.h
         library/src/model/Car.cpp
-        library/include/model/Car.h
         library/src/model/Motorcycle.cpp
-        library/include/model/Motorcycle.h
         library/src/model/Client.cpp
-        library/include/model/Client.h
         library/src/repositories/ClientRepository.cpp
-        library/include/repositories/ClientRepository.h
-        library/src/managers/ClientManager.cpp
-        library/include/managers/ClientManager.h
         library/src/managers/ClientManager.cpp
         library/src/LogicContainer.cpp
-        library/include/LogicContainer.h
         library/src/repositories/VehicleRepository.cpp
-        library/include/repositories/VehicleRepository.h
         library/src/managers/VehicleManager.cpp
-        library/include/managers/VehicleManager.h
-        library/include/StatusType.h
-        library/include/Part.h
         library/src/RepairOrder.cpp
-        library/include/RepairOrder.h
         library/src/repositories/RepairOrderRepository.cpp
-        library/include/repositories/RepairOrderRepository.h
         library/src/managers/RepairOrderManager.cpp
-        library/include/managers/RepairOrderManager.h)
-
-add_executable(untitled5 ${SOURCE_FILES}
+)
+add_executable(untitled5
         program/src/main.cpp
-        library/src/managers/ClientManager.cpp)
-
+        ${LIBRARY_SOURCES}
+)
 target_include_directories(untitled5 PUBLIC library/include)
 
 
 #TESTs
 find_package(Boost 1.65 COMPONENTS "unit_test_framework" REQUIRED)
+
+set(TEST_SOURCES
+        library/test/master.cpp
+        library/test/ModelTests.cpp
+        library/test/WorkshopTest.cpp
+        library/test/VehicleRepositoryTest.cpp
+)
+
+add_executable(WorkshopTests ${TEST_SOURCES} ${LIBRARY_SOURCES})
+target_include_directories(WorkshopTests PUBLIC library/include)
+target_link_libraries(WorkshopTests Boost::unit_test_framework)
