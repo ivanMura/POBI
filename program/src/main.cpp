@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <boost/smart_ptr/shared_ptr.hpp>
+#include <stdexcept>
 
 #include "managers/RepairOrderManager.h"
 #include "managers/ClientManager.h"
@@ -39,12 +40,13 @@ int main() {
 
     cout<<"Pojzdy sa w naprawie sprawdzamy czy dziala zabezpieczenie: "<<endl;
 
-    shared_ptr<RepairOrder> order3 = repairOrderManager.createOrder("123456789", "wymianaKlimy", car);
-    if (order3 == nullptr) {
-        cout<<"Nie mozna utworzyc zamowienia, pojazd jest w naprawie"<<endl;
-    }
-    else {
+    try {
+        shared_ptr<RepairOrder> order3 = repairOrderManager.createOrder("123456789", "wymianaKlimy", car);
         cout<<"Mozna utworzyc zamowienie [BLAD W IMPLEMENTACJI!!!!!!]"<<endl;
     }
+    catch (const std::logic_error& e) {
+        cout<<"Zlapano wyjatek! Nie mozna utworzyc zamowienia: " << e.what() << endl;
+    }
+
     return 0;
 }

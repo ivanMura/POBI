@@ -8,6 +8,7 @@
 #include <chrono>
 #include <iomanip>
 #include <sstream>
+#include <stdexcept>
 
 RepairOrderManager::RepairOrderManager() {
     orderRepository = std::make_shared<RepairOrderRepository>();
@@ -22,8 +23,8 @@ std::shared_ptr<RepairOrder> RepairOrderManager::createOrder(std::string vehicle
             StatusType currentStatus = order->getStatus();
 
             if (currentStatus == StatusType::NEW || currentStatus == StatusType::PROCESSING) {
-                std::cout << "Vehicle is already in repair, vin: " << vehicleVin <<std::endl;
-                return nullptr;
+                throw std::logic_error ( "Vehicle is already in repair, vin: " + vehicleVin);
+
             }
         }
     }

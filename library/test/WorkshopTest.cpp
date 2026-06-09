@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_SUITE(WorkshopTestSuite)
     BOOST_REQUIRE(order != nullptr);
     BOOST_CHECK(order->getStatus() == StatusType::NEW);
     std::shared_ptr<RepairOrder> order2 = repairOrderManager.createOrder("blokadas", "cosinnego", car);
-    BOOST_REQUIRE(order2 == nullptr);
+    BOOST_REQUIRE_THROW(repairOrderManager.createOrder("blokadas", "cosinnego", car), std::logic_error);
 }
 
 BOOST_AUTO_TEST_CASE(BlockadeForDoubleOrderMoto) {
