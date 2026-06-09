@@ -28,7 +28,6 @@ BOOST_AUTO_TEST_SUITE(WorkshopTestSuite)
     std::shared_ptr<RepairOrder> order = repairOrderManager.createOrder("blokadas", "emeryturaDlaArtysty", car);
     BOOST_REQUIRE(order != nullptr);
     BOOST_CHECK(order->getStatus() == StatusType::NEW);
-    std::shared_ptr<RepairOrder> order2 = repairOrderManager.createOrder("blokadas", "cosinnego", car);
     BOOST_REQUIRE_THROW(repairOrderManager.createOrder("blokadas", "cosinnego", car), std::logic_error);
 }
 
@@ -38,7 +37,7 @@ BOOST_AUTO_TEST_CASE(BlockadeForDoubleOrderMoto) {
     std::shared_ptr<RepairOrder> order = manager.createOrder("vinMot", "zmiana1", moto);
     BOOST_REQUIRE(order != nullptr);
     BOOST_CHECK(order->getStatus() == StatusType::NEW);
-    std::shared_ptr<RepairOrder> order2 = manager.createOrder("vinMot", "cosinnego", moto);
+BOOST_REQUIRE_THROW(manager.createOrder("vinMot", "cosinnego", moto), std::logic_error);
 }
 
 
