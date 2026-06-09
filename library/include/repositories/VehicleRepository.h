@@ -15,6 +15,12 @@ class VehicleRepository
     public:
     VehicleRepository();
     ~VehicleRepository();
+    /**
+     * @brief Dodaje nowy pojazd do repozytorium.
+     * @param vehicle Wskaźnik na obiekt pojazdu, który ma zostać zapisany.
+     * @return true Jeśli dodawanie zakończyło się sukcesem.
+     * @return false Jeśli pojazd o tym samym numerze VIN już istnieje w bazie.
+     */
     bool add(std::shared_ptr<Vehicle> vehicle);
     std::shared_ptr<Vehicle> getByVin(std::string vin);
 private:

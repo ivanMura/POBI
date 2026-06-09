@@ -21,4 +21,8 @@ VehicleManager & LogicContainer::getVehicleManager()
  return vehicleManager;
 }
 
+RepairOrderManager & LogicContainer::getRepairOrderManager() {
+ return repairOrderManager;
+}
+
 

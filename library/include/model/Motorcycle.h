@@ -14,6 +14,10 @@ class Motorcycle  : public Vehicle
 public:
     Motorcycle(std::string vin, std::string brand, std::string model, std::string typeOfWheels);
     ~Motorcycle() override = default;
+    /**
+     * @brief Oblicza bazowy koszt naprawy specyficzny dla motocykla (w zaleznosci od kol jakie ten posiada).
+     * @return double Kwota bazowa kosztu naprawy.
+     */
     double calculateBaseRepairCost() override;
     std::string getTypeOfWheels();
     std::string getInfo() override;

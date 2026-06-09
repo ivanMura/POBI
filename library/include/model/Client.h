@@ -18,11 +18,16 @@ public:
     ~Client();
     std::string getFullName();
     int getId();
+    /**
+     * @brief Przypisuje nowy pojazd do listy pojazdów posiadanych przez klienta.
+     * @param vehicle Wskaźnik shared_ptr na obiekt pojazdu.
+     */
     void addVehicle(std::shared_ptr<Vehicle> vehicle);
 private:
     std::string firstName;
     std::string lastName;
     int id;
+
     std::vector<std::shared_ptr<Vehicle>> vehicles;
 };
 

@@ -14,8 +14,12 @@ private:
 public:
     RepairOrderRepository();
     ~RepairOrderRepository();
-
+    /**
+         * @brief Dodaje nowe zlecenie naprawy do repozytorium.
+         * @param order Wskaźnik na zlecenie, które ma zostać zarejestrowane.
+         */
     void add(std::shared_ptr<RepairOrder> order);
+    
     std::shared_ptr<RepairOrder> getById(int id);
 
     std::vector<std::shared_ptr<RepairOrder>> getAll() const;

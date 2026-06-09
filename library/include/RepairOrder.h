@@ -25,7 +25,14 @@ public:
     RepairOrder(int id, std::string arrivalTime, std::string issueType, std::shared_ptr<Vehicle> vehicle);
 
     void addPart(std::shared_ptr<Part> part);
+    /**
+     * @brief Oblicza całkowity koszt zlecenia ( koszt części + bazowy koszt naprawy pojazdu).
+     * @return double Sumaryczny koszt naprawy.
+     */
     double calculateCost();
+    /**
+     * @brief Zamyka zlecenie naprawy i zmienia jego status na COMPLETED.
+     */
     void closeOrder();
 
     int getId() const;

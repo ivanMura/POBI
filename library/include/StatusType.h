@@ -6,8 +6,8 @@
 #define UNTITLED5_STATUSTYPE_H
 
 enum StatusType {
-    NEW,
-    PROCESSING,
-    COMPLITED
+    NEW,        /**< Nowe zlecenie, jeszcze nieobsługiwane. */
+    PROCESSING, /**< Zlecenie w trakcie realizacji / naprawy. */
+    COMPLITED   /**< Zlecenie zakończone. */
 };
 #endif //UNTITLED5_STATUSTYPE_H
